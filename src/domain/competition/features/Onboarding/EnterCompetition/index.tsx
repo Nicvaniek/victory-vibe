@@ -43,6 +43,7 @@ export const EnterCompetition = ({ onMsg, user, competition }: Props) => {
                 <div>
                     <span>Show competition rules</span>
                     <button
+                        className="btn btn-primary"
                         onClick={() =>
                             setLoadable({
                                 type: 'loading',

@@ -43,6 +43,7 @@ export const MakePicks = ({ onMsg, competition, user }: Props) => {
                 <div>
                     <span>Some layout stuff for picks screen</span>
                     <button
+                        className="btn btn-primary"
                         onClick={() =>
                             setLoadable({
                                 type: 'loading',
