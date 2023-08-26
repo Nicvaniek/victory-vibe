@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
-import { AuthProvider } from './domain/auth'
-import { Router } from './domain/navigation'
+import { AuthProvider } from './auth'
+import { Router } from './navigation'
 
 function App() {
     return (

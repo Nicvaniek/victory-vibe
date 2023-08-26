@@ -1,7 +1,11 @@
-import { User } from '../user'
 import React, { createContext, ReactNode } from 'react'
 import { login } from './api/login'
 import { useLocalStorage } from '../storage/useLocalStorage'
+
+export type User = {
+    id: string
+    name: string
+}
 
 export type Session = {
     user: User

@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { AuthContext } from './index'
 import { useNavigate } from 'react-router-dom'
-import { routes } from '../navigation'
 
 export const Login = () => {
     const [loginCode, setLoginCode] = useState<string>('')
@@ -15,7 +14,7 @@ export const Login = () => {
     }
 
     if (auth.session) {
-        navigate(routes.COMPETITIONS)
+        navigate('/play')
         return null
     }
 
@@ -24,7 +23,7 @@ export const Login = () => {
 
         try {
             await loginWithCode(loginCode)
-            navigate(routes.COMPETITIONS)
+            navigate('/play')
         } catch (error) {
             console.error(error)
             setErrorMessage((error as any).message)
