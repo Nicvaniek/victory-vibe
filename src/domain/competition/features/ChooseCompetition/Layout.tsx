@@ -13,6 +13,7 @@ export const Layout = ({ competitions, onMsg }: Props) => {
             <span>Some title etc</span>
             {competitions.map((competition) => (
                 <button
+                    className="btn btn-primary"
                     onClick={() =>
                         onMsg({ type: 'on_competition_select', competition })
                     }

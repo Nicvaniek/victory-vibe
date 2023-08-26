@@ -1,6 +1,6 @@
-import { useContext, useState } from 'react'
-import { AuthContext } from './index'
-import { useNavigate } from 'react-router-dom'
+import {useContext, useState} from 'react'
+import {AuthContext} from './index'
+import {useNavigate} from 'react-router-dom'
 
 export const Login = () => {
     const [loginCode, setLoginCode] = useState<string>('')
@@ -19,7 +19,7 @@ export const Login = () => {
     }
 
     const handleLogin = async () => {
-        const { loginWithCode } = auth
+        const {loginWithCode} = auth
 
         try {
             await loginWithCode(loginCode)
@@ -38,7 +38,7 @@ export const Login = () => {
                 value={loginCode}
                 onChange={(e) => setLoginCode(e.target.value)}
             />
-            <button onClick={handleLogin}>Login</button>
+            <button className="btn btn-primary" onClick={handleLogin}>Login</button>
             {errorMessage && <p>{errorMessage}</p>}
         </div>
     )
