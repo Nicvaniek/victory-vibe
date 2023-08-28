@@ -8,7 +8,22 @@ export default {
 
     // daisyUI config (optional - here are the default values)
     daisyui: {
-        themes: false, // true: all themes | false: only light + dark | array: specific themes like this ["light", "dark", "cupcake"]
+        themes: [
+            'lemonade',
+            {
+                rugbyWorldCup2023: {
+                    primary: '#2d3cff',
+                    secondary: '#19194b',
+                    accent: '#ff3000',
+                    neutral: '#191d29',
+                    'base-100': '#ffffff',
+                    info: '#3b7be3',
+                    success: '#1fd677',
+                    warning: '#bf9b0d',
+                    error: '#f6132d',
+                },
+            },
+        ],
         darkTheme: 'dark', // name of one of the included themes for dark mode
         base: true, // applies background color and foreground color for root element by default
         styled: true, // include daisyUI colors and design decisions for all components
@@ -18,3 +33,5 @@ export default {
         logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
     },
 }
+
+// rwc image: https://www.rugbyworldcup.com/rwc2023-resources/prod/rwc2023_v4.1.0/i/bg-elements/shapes/main.png

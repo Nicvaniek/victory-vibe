@@ -9,7 +9,7 @@ type Props = {
     onTabSelect: (tab: Tab) => void
 }
 export const BottomNav = ({ activeTab, onTabSelect }: Props) => (
-    <div className="btm-nav">
+    <div className="btm-nav text-secondary">
         <button
             className={activeTab.type === 'leaderboard' ? 'active' : ''}
             onClick={() => onTabSelect({ type: 'leaderboard' })}

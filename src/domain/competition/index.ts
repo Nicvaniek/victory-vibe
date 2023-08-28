@@ -8,4 +8,9 @@ export type Competition = {
     heroImage: string
     participants: Participant[]
     teams: CompetitionTeam[]
+    theme: string
+    tierInfo: {
+        numTiers: number
+        picksPerTier: number
+    }
 }

@@ -5,6 +5,7 @@ import { notReachable } from '../../../../../toolkit/notReachable'
 import { useEffect } from 'react'
 import { useLiveRef } from '../../../../../toolkit/useLiveRef'
 import { User } from '../../../../../auth'
+import { Layout } from './Layout'
 
 type Props = {
     competition: Competition
@@ -40,27 +41,26 @@ export const MakePicks = ({ onMsg, competition, user }: Props) => {
         case 'not_asked':
         case 'loaded':
             return (
-                <div>
-                    <span>Some layout stuff for picks screen</span>
-                    <button
-                        className="btn btn-primary"
-                        onClick={() =>
-                            setLoadable({
-                                type: 'loading',
-                                params: {
-                                    user,
-                                    competition,
-                                    picks: [
-                                        competition.teams[0],
-                                        competition.teams[1],
-                                    ],
-                                },
-                            })
+                <Layout
+                    competition={competition}
+                    onMsg={(msg) => {
+                        switch (msg.type) {
+                            case 'on_confirm_picks':
+                                setLoadable({
+                                    type: 'loading',
+                                    params: {
+                                        user,
+                                        competition,
+                                        picks: msg.picks,
+                                    },
+                                })
+                                break
+                            /* istanbul ignore next */
+                            default:
+                                return notReachable(msg.type)
                         }
-                    >
-                        Save picks
-                    </button>
-                </div>
+                    }}
+                />
             )
         case 'loading':
             return <span>Loading...</span>

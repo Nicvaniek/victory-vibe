@@ -1,3 +1,7 @@
 .btm-nav {
     position: relative !important;
 }
+
+[data-theme="rugbyWorldCup2023"] .btn-primary {
+    color: white;
+}
