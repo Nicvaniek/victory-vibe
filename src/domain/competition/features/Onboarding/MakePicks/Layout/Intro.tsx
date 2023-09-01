@@ -13,7 +13,7 @@ export const Intro = ({ onMsg }: Props) => {
                     src="https://www.rugbyworldcup.com/rwc2023-resources/prod/rwc2023_v4.1.0/i/svg-files/elements/symbols/rwc2023-logo-white.svg"
                     alt="logo"
                 />
-                <h1 className="text-3xl mt-8 mb-4 text-center">Make your picks</h1>
+                <h1 className="text-4xl mt-8 mb-4 text-center">Make your picks</h1>
                 <p className="text-center">
                     Explain some stuff here about how picks work, the different
                     tiers etc.
