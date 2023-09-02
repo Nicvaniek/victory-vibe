@@ -1,24 +1,46 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BottomNav, Tab } from './BottomNav'
 import { notReachable } from '../../../../../toolkit/notReachable'
 import { Leaderboard } from '../Leaderboard'
 import { MyPicks } from '../MyPicks'
 import { Matches } from '../Matches'
 import { Settings } from '../Settings'
+import { Competition } from '../../../index'
+import { User } from '../../../../../auth'
+import { MsgOf } from '../../../../../toolkit/MsgOf'
 
 type Props = {
+    competition: Competition
+    user: User
     onMsg: (msg: Msg) => void
 }
 
-type Msg = { type: 'close' }
+type Msg = MsgOf<typeof Settings>
 
-export const TabController = (_: Props) => {
+export const TabController = ({ competition, user, onMsg }: Props) => {
     const [activeTab, setActiveTab] = useState<Tab>({ type: 'leaderboard' })
+
+    useEffect(() => {
+        const tabContent = document.getElementById('tab-content')
+        if (tabContent) {
+            // FIXME: get dynamic heights of navbar and btmNav
+            tabContent.style.height = `${window.innerHeight - 64 - 64}px`
+        }
+    }, [])
 
     return (
         <div className="container mx-auto flex flex-col h-full justify-between">
-            <div className="flex-1">
-                <Content activeTab={activeTab} />
+            <div className="navbar bg-white text-secondary">
+                <img className="h-10" src={competition.logo} alt="logo" />
+                <span className="normal-case text-xl">{competition.name}</span>
+            </div>
+            <div className="flex-1" id="tab-content">
+                <Content
+                    activeTab={activeTab}
+                    competition={competition}
+                    user={user}
+                    onMsg={onMsg}
+                />
             </div>
             <BottomNav
                 activeTab={activeTab}
@@ -28,16 +50,26 @@ export const TabController = (_: Props) => {
     )
 }
 
-const Content = ({ activeTab }: { activeTab: Tab }) => {
+const Content = ({
+    activeTab,
+    competition,
+    user,
+    onMsg,
+}: {
+    activeTab: Tab
+    competition: Competition
+    user: User
+    onMsg: (msg: Msg) => void
+}) => {
     switch (activeTab.type) {
         case 'leaderboard':
-            return <Leaderboard />
+            return <Leaderboard competition={competition} />
         case 'my_picks':
-            return <MyPicks />
+            return <MyPicks competition={competition} user={user} />
         case 'matches':
-            return <Matches />
+            return <Matches competition={competition} user={user} />
         case 'settings':
-            return <Settings />
+            return <Settings competition={competition} onMsg={onMsg} />
         /* istanbul ignore next */
         default:
             return notReachable(activeTab)

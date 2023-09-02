@@ -17,6 +17,8 @@ const addRwc23Teams = async (db) => {
 
         return {
             name,
+            rankingMultiplier: 1,
+            tier: 1,
             team,
         }
     })

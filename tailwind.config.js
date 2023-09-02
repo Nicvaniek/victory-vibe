@@ -9,7 +9,7 @@ export default {
     // daisyUI config (optional - here are the default values)
     daisyui: {
         themes: [
-            'lemonade',
+            'cupcake',
             {
                 rugbyWorldCup2023: {
                     primary: '#2d3cff',

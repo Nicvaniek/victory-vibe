@@ -25,6 +25,7 @@ export const Layout = ({ competition, onMsg }: Props) => {
         case 'intro':
             return (
                 <Intro
+                    competition={competition}
                     onMsg={(msg) => {
                         switch (msg.type) {
                             case 'on_continue':

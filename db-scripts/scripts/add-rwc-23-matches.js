@@ -54,7 +54,7 @@ const addRwc23Matches = async (db) => {
             awayTeam: awayTeam || null,
             stage: getStage(match),
             date: match['time']['label'],
-            winner: null,
+            result: null,
         }
     })
 

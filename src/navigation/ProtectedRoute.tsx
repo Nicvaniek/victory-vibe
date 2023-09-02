@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
-import { AuthContext, Session } from '../auth'
+import { Auth, AuthContext } from '../auth'
 import { Navigate } from 'react-router-dom'
 
 type Props = {
-    element: React.ComponentType<{ session: Session }>
+    element: React.ComponentType<{ auth: Auth }>
 }
 
 export const ProtectedRoute = ({ element: Element }: Props) => {
@@ -13,5 +13,5 @@ export const ProtectedRoute = ({ element: Element }: Props) => {
         return <Navigate to="/login" replace />
     }
 
-    return <Element session={auth.session} />
+    return <Element auth={auth} />
 }

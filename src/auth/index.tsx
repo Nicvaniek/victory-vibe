@@ -12,7 +12,7 @@ export type Session = {
     sessionId: string
 }
 
-type Auth = {
+export type Auth = {
     session: Session | null
     loginWithCode: (code: string) => Promise<void>
     logout: () => void

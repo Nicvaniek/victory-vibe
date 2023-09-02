@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { notReachable } from '../../toolkit/notReachable'
 import { Onboarding } from './features/Onboarding'
 import { CompetitionApp } from './features/CompetitionApp'
+import { MsgOf } from '../../toolkit/MsgOf'
 
 type Props = {
     user: User
@@ -11,7 +12,7 @@ type Props = {
     onMsg: (msg: Msg) => void
 }
 
-type Msg = {}
+type Msg = MsgOf<typeof CompetitionApp>
 
 type State =
     | { type: 'onboarding'; competition: Competition }
@@ -36,7 +37,7 @@ const calculateState = (
     return { type: 'competition', competition }
 }
 
-export const CompetitionWrapper = ({ user, competition }: Props) => {
+export const CompetitionWrapper = ({ user, competition, onMsg }: Props) => {
     const [state, setState] = useState<State>(calculateState(competition, user))
 
     switch (state.type) {
@@ -63,8 +64,9 @@ export const CompetitionWrapper = ({ user, competition }: Props) => {
         case 'competition':
             return (
                 <CompetitionApp
+                    user={user}
                     competition={state.competition}
-                    onMsg={() => {}}
+                    onMsg={onMsg}
                 />
             )
         /* istanbul ignore next */

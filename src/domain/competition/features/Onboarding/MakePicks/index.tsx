@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { useLiveRef } from '../../../../../toolkit/useLiveRef'
 import { User } from '../../../../../auth'
 import { Layout } from './Layout'
+import { HashLoader } from 'react-spinners'
 
 type Props = {
     competition: Competition
@@ -63,7 +64,11 @@ export const MakePicks = ({ onMsg, competition, user }: Props) => {
                 />
             )
         case 'loading':
-            return <span>Loading...</span>
+            return (
+                <div className="flex flex-col justify-center items-center h-full w-full bg-primary">
+                    <HashLoader loading={true} color="white" />
+                </div>
+            )
         case 'error':
             return <span>Error!</span>
         /* istanbul ignore next */

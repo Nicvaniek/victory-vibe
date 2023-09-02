@@ -1,5 +1,6 @@
 import { Participant } from '../participant'
 import { CompetitionTeam } from '../competition-team'
+import { Match } from '../match'
 
 export type Tier = {
     tier: number
@@ -13,6 +14,11 @@ export type Competition = {
     heroImage: string
     participants: Participant[]
     teams: CompetitionTeam[]
+    matches: Match[]
     theme: string
     tiers: Tier[]
+    points: {
+        draw: number
+        win: number
+    }
 }

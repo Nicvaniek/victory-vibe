@@ -2,11 +2,14 @@ import React from 'react'
 import './App.css'
 import { AuthProvider } from './auth'
 import { Router } from './navigation'
+import { IntlProvider } from 'react-intl'
 
 function App() {
     return (
         <AuthProvider>
-            <Router />
+            <IntlProvider locale="en">
+                <Router />
+            </IntlProvider>
         </AuthProvider>
     )
 }
