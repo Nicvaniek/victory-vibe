@@ -5,5 +5,6 @@ export type Participant = {
     user: User
     picks: CompetitionTeam[]
     points: number // calculated
+    rank: number // calculated
     matchesPlayed: number // calculated
 }

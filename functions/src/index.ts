@@ -42,7 +42,11 @@ app.post('/login', async (req, res) => {
 
     return res.status(200).json({
         sessionId,
-        user: { id: document.id, name: document.data()['name'] },
+        user: {
+            id: document.id,
+            name: document.data()['name'],
+            isAdmin: document.data()['isAdmin'],
+        },
     })
 })
 

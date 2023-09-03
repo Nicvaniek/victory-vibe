@@ -1,19 +1,23 @@
-import { Competition } from '../../../../index'
-import { CompetitionTeam } from '../../../../../competition-team'
 import { useCallback, useState } from 'react'
-import { ListItem } from '../../../../../competition-team/components/ListItem'
-import { sortByRank } from '../../../../../competition-team/helpers/sortByRank'
+import { CompetitionTeam } from '../../../../../../competition-team'
+import { sortByRank } from '../../../../../../competition-team/helpers/sortByRank'
+import { ListItem } from '../../../../../../competition-team/components/ListItem'
+import { Competition } from '../../../../../index'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
 
 type Props = {
     competition: Competition
     onMsg: (msg: Msg) => void
 }
 
-type Msg = { type: 'on_continue'; picks: CompetitionTeam[] }
+type Msg =
+    | { type: 'on_continue'; picks: CompetitionTeam[] }
+    | { type: 'on_view_rules_click' }
 
 type Form = Record<number, CompetitionTeam[]>
 
-export const Picks = ({ competition, onMsg }: Props) => {
+export const Layout = ({ competition, onMsg }: Props) => {
     const [currentTierIndex, setCurrentTierIndex] = useState<number>(0)
     const [selectedTeams, setSelectedTeams] = useState<Form>({
         0: [] as CompetitionTeam[],
@@ -58,11 +62,15 @@ export const Picks = ({ competition, onMsg }: Props) => {
                         src="https://www.rugbyworldcup.com/rwc2023-resources/prod/rwc2023_v4.1.0/i/svg-files/elements/symbols/rwc2023-logo-white.svg"
                         alt="logo"
                     />
-                    <h1 className="text-4xl ms-3">
+                    <h1 className="text-4xl ms-3 me-3">
                         Tier {currentTier.tier} teams
                     </h1>
+                    <FontAwesomeIcon
+                        icon={faCircleQuestion}
+                        onClick={() => onMsg({ type: 'on_view_rules_click' })}
+                    />
                 </div>
-                <p className="text-center text-xs">
+                <p className="text-center text-sm">
                     Select your {currentTier.numPicks} picks for this tier.
                     <br />
                     <strong>Tip:</strong> To de-select a chosen team, just tap
@@ -75,6 +83,7 @@ export const Picks = ({ competition, onMsg }: Props) => {
                         key={`${idx}-${team.name}`}
                         onClick={handleSelect}
                         competitionTeam={team}
+                        showPoints={false}
                         selected={selectedTeams[currentTierIndex]?.includes(
                             team
                         )}

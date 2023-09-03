@@ -5,6 +5,7 @@ import { useLocalStorage } from '../storage/useLocalStorage'
 export type User = {
     id: string
     name: string
+    isAdmin: boolean
 }
 
 export type Session = {

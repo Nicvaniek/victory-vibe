@@ -5,6 +5,8 @@ import { useLiveRef } from '../../../../../toolkit/useLiveRef'
 import { useEffect } from 'react'
 import { User } from '../../../../../auth'
 import { Competition } from '../../../index'
+import { HashLoader } from 'react-spinners'
+import { Rules } from '../../Rules'
 
 type Props = {
     user: User
@@ -40,17 +42,24 @@ export const EnterCompetition = ({ onMsg, user, competition }: Props) => {
         case 'not_asked':
         case 'loaded':
             return (
-                <div>
-                    <span>Show competition rules</span>
+                <div className="flex flex-col p-4 flex-1 justify-between h-full">
+                    <div className="flex items-center">
+                        <img
+                            className="h-10"
+                            src={competition.heroImage}
+                            alt="logo"
+                        />
+                        <h1 className="text-3xl ml-4">Rules</h1>
+                    </div>
+                    <div className="flex-1 mt-4 overflow-auto">
+                        <Rules />
+                    </div>
                     <button
-                        className="btn btn-primary"
+                        className="btn bg-accent text-white border-accent mt-2"
                         onClick={() =>
                             setLoadable({
                                 type: 'loading',
-                                params: {
-                                    user,
-                                    competition,
-                                },
+                                params: { user, competition },
                             })
                         }
                     >
@@ -59,7 +68,11 @@ export const EnterCompetition = ({ onMsg, user, competition }: Props) => {
                 </div>
             )
         case 'loading':
-            return <span>Loading...</span>
+            return (
+                <div className="flex flex-col justify-center items-center h-full w-full bg-primary">
+                    <HashLoader loading={true} color="white" />
+                </div>
+            )
         case 'error':
             return <span>Error!</span>
         /* istanbul ignore next */

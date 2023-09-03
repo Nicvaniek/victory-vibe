@@ -31,7 +31,7 @@ export const Confirmation = ({ picks, onMsg }: Props) => {
                     />
                     <h1 className="text-4xl ms-3">Confirm picks</h1>
                 </div>
-                <p className="text-center text-xs">
+                <p className="text-center text-sm">
                     Please confirm your picks below, or choose different teams
                     by selecting "Restart".
                     <br />
@@ -50,6 +50,7 @@ export const Confirmation = ({ picks, onMsg }: Props) => {
                                     key={`${idx}-${team.name}`}
                                     competitionTeam={team}
                                     selected={null}
+                                    showPoints={false}
                                 />
                             ))}
                         </div>

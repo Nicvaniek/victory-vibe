@@ -1,52 +1,51 @@
 import { Competition } from '../../../index'
-import { Participant } from '../../../../participant'
+import { Modal, State as ModalState } from './Modal'
+import { useState } from 'react'
+import { Layout } from './Layout'
+import { notReachable } from '../../../../../toolkit/notReachable'
+import { User } from '../../../../../auth'
 
 type Props = {
+    user: User
     competition: Competition
 }
 
-const sortByPoints = (a: Participant, b: Participant) => (a.points = b.points)
-
-export const Leaderboard = ({ competition }: Props) => {
-    const sorted = competition.participants.sort(sortByPoints)
+export const Leaderboard = ({ competition, user }: Props) => {
+    const [modal, setModal] = useState<ModalState>({ type: 'closed' })
 
     return (
-        <div className="flex flex-col p-4 h-full">
-            <h1 className="text-3xl">Standings</h1>
-            <div className="mt-4 overflow-x-auto">
-                <table className="table table-fixed border-separate border-spacing-y-2 text-center">
-                    <thead className="text-white">
-                        <tr className="border-0">
-                            <th>POS</th>
-                            <th className="w-1/2">NAME</th>
-                            <th>PLD</th>
-                            <th>POINTS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {sorted.map((participant, idx) => (
-                            <tr className="bg-white text-secondary">
-                                <th className="rounded-l-xl px-0">{idx + 1}</th>
-                                <td className="whitespace-nowrap overflow-hidden text-ellipsis px-1">
-                                    {participant.user.name}
-                                </td>
-                                <td className="px-0">
-                                    {participant.matchesPlayed || 0}
-                                </td>
-                                <td
-                                    className={`rounded-r-xl bg-accent bg-opac text-white font-bold px-0 ${
-                                        idx < 3
-                                            ? 'bg-opacity-100'
-                                            : 'bg-opacity-75'
-                                    }`}
-                                >
-                                    {participant.points || 0}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <>
+            <Layout
+                user={user}
+                competition={competition}
+                onMsg={(msg) => {
+                    switch (msg.type) {
+                        case 'on_participant_click':
+                            setModal({
+                                type: 'participant_picks',
+                                participant: msg.participant,
+                            })
+                            break
+                        /* istanbul ignore next */
+                        default:
+                            return notReachable(msg.type)
+                    }
+                }}
+            />
+            <Modal
+                state={modal}
+                user={user}
+                onMsg={(msg) => {
+                    switch (msg.type) {
+                        case 'close':
+                            setModal({ type: 'closed' })
+                            break
+                        /* istanbul ignore next */
+                        default:
+                            return notReachable(msg.type)
+                    }
+                }}
+            />
+        </>
     )
 }

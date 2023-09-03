@@ -1,49 +1,31 @@
-import { Competition } from '../../../index'
-import { Modal, State as ModalState } from './Modal'
 import { useState } from 'react'
+import { Competition } from '../../../../../index'
+import { Modal, State as ModalState } from './Modal'
+import { MsgOf } from '../../../../../../../toolkit/MsgOf'
 import { Layout } from './Layout'
-import { MsgOf } from '../../../../../toolkit/MsgOf'
-import { notReachable } from '../../../../../toolkit/notReachable'
-import { User } from '../../../../../auth'
+import { notReachable } from '../../../../../../../toolkit/notReachable'
 
 type Props = {
     competition: Competition
-    user: User
     onMsg: (msg: Msg) => void
 }
 
-type Msg =
-    | Extract<
-          MsgOf<typeof Layout>,
-          {
-              type: 'on_sign_out'
-          }
-      >
-    | Extract<
-          MsgOf<typeof Modal>,
-          {
-              type: 'result_added'
-          }
-      >
+type Msg = Extract<MsgOf<typeof Layout>, { type: 'on_continue' }>
 
-export const Settings = ({ competition, onMsg, user }: Props) => {
+export const Picks = ({ competition, onMsg }: Props) => {
     const [modal, setModal] = useState<ModalState>({ type: 'closed' })
 
     return (
         <>
             <Layout
-                user={user}
                 competition={competition}
                 onMsg={(msg) => {
                     switch (msg.type) {
-                        case 'on_sign_out':
-                            onMsg(msg)
-                            break
-                        case 'on_rules_click':
+                        case 'on_view_rules_click':
                             setModal({ type: 'rules' })
                             break
-                        case 'on_add_results_click':
-                            setModal({ type: 'add_results' })
+                        case 'on_continue':
+                            onMsg(msg)
                             break
                         /* istanbul ignore next */
                         default:
@@ -59,12 +41,9 @@ export const Settings = ({ competition, onMsg, user }: Props) => {
                         case 'close':
                             setModal({ type: 'closed' })
                             break
-                        case 'result_added':
-                            onMsg(msg)
-                            break
                         /* istanbul ignore next */
                         default:
-                            return notReachable(msg)
+                            return notReachable(msg.type)
                     }
                 }}
             />

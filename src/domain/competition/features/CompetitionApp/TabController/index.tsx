@@ -63,13 +63,13 @@ const Content = ({
 }) => {
     switch (activeTab.type) {
         case 'leaderboard':
-            return <Leaderboard competition={competition} />
+            return <Leaderboard competition={competition} user={user} />
         case 'my_picks':
             return <MyPicks competition={competition} user={user} />
         case 'matches':
             return <Matches competition={competition} user={user} />
         case 'settings':
-            return <Settings competition={competition} onMsg={onMsg} />
+            return <Settings competition={competition} onMsg={onMsg} user={user} />
         /* istanbul ignore next */
         default:
             return notReachable(activeTab)

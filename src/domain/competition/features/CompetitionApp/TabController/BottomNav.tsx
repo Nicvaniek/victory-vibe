@@ -30,7 +30,7 @@ export const BottomNav = ({ activeTab, onTabSelect }: Props) => (
             onClick={() => onTabSelect({ type: 'my_picks' })}
         >
             <FontAwesomeIcon icon={faMedal} />
-            <span className="btm-nav-label">My Picks</span>
+            <span className="btm-nav-label">My picks</span>
         </button>
         <button
             className={activeTab.type === 'matches' ? 'active' : ''}
