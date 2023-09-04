@@ -8,7 +8,7 @@ type Props = {
 export const ListItem = ({ match }: Props) => {
     if (!match.result) {
         return (
-            <div className="flex flex-row flex-1 bg-white text-secondary mb-2 py-2 px-3 justify-center items-center rounded-xl drop-shadow-lg">
+            <div className="flex flex-row flex-1 bg-white text-secondary mb-2 py-2 px-3 justify-center items-center rounded-xl">
                 <div className="flex items-center flex-1 justify-end">
                     {match.homeTeam && (
                         <>
@@ -51,7 +51,7 @@ export const ListItem = ({ match }: Props) => {
     switch (match.result.type) {
         case 'draw': {
             return (
-                <div className="flex flex-row flex-1 bg-white text-secondary mb-2 py-2 px-3 justify-center items-center rounded-xl drop-shadow-lg">
+                <div className="flex flex-row flex-1 bg-white text-secondary mb-2 py-2 px-3 justify-center items-center rounded-xl">
                     <div className="flex items-center flex-1 justify-end">
                         {match.homeTeam && (
                             <>
@@ -102,7 +102,7 @@ export const ListItem = ({ match }: Props) => {
         }
         case 'victory': {
             return (
-                <div className="flex flex-row flex-1 bg-white text-secondary mb-2 py-2 px-3 justify-center items-center rounded-xl drop-shadow-lg">
+                <div className="flex flex-row flex-1 bg-white text-secondary mb-2 py-2 px-3 justify-center items-center rounded-xl">
                     <div className="flex items-center flex-1 justify-end">
                         {match.homeTeam && (
                             <>

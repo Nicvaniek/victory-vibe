@@ -28,7 +28,7 @@ export const Layout = ({ competition, onMsg, user }: Props) => (
                         const isLoggedInUser = participant.user.id === user.id
                         return (
                             <tr
-                                className="bg-white text-secondary drop-shadow-lg"
+                                className="bg-white text-secondary"
                                 style={{ cursor: 'pointer' }}
                                 onClick={() =>
                                     onMsg({
