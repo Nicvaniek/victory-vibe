@@ -38,9 +38,9 @@ export const ParticipantPicks = ({ user, participant }: Props) => {
             <div className="stats shadow mt-4">
                 <div className="stat place-items-center">
                     <div className="stat-title">Points</div>
-                    <div className="stat-value">{participant.points}</div>
+                    <div className="stat-value">{participant.points || 0}</div>
                     <div className="stat-desc">
-                        Across {participant.matchesPlayed} game(s)
+                        Across {participant.matchesPlayed || 0} game(s)
                     </div>
                 </div>
 

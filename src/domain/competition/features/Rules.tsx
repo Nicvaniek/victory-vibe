@@ -65,23 +65,23 @@ export const Rules = () => {
             <p className="mt-4">
                 <strong>Points are calculated as follows:</strong>
                 <br />
-                <i>Points earned = base points x handicap x stage modifier</i>
+                <i>Points earned = base points&nbsp;&nbsp;x&nbsp;&nbsp;handicap&nbsp;&nbsp;x&nbsp;&nbsp;stage modifier</i>
             </p>
             <p className="mt-4">
-                <strong>Example 1:</strong> New Zealand has a handicap of 1.07
+                <strong>Example 1:</strong> New Zealand has a handicap of 1.06
                 based on their world ranking points. Winning a quarter final
-                would earn New Zealand
+                would earn New Zealand&nbsp;
                 <i>
-                    30 x 1.07 x 1.5 ≈ <strong>48 points</strong>
+                    30 x 1.06 x 1.5 ≈ <strong>48 points </strong>
                 </i>
                 (rounded to the nearest whole number).
             </p>
             <p className="mt-4">
                 <strong>Example 2:</strong> Namibia has a handicap of 1.66 based
                 on their world ranking points. Winning a pool game would earn
-                Namibia
+                Namibia&nbsp;
                 <i>
-                    30 x 1.66 x 1 ≈ <strong>50 points</strong>
+                    30 x 1.66 x 1 ≈ <strong>50 points </strong>
                 </i>
                 (rounded to the nearest whole number).
             </p>

@@ -14,7 +14,7 @@ export const ListItem = ({
     showPoints,
 }: Props) => (
     <div
-        className="flex flex-row flex-1 bg-white text-secondary mb-2 py-2 px-3 justify-between items-center rounded-xl max-h-16"
+        className="flex flex-row flex-1 bg-white text-secondary mb-2 py-2 px-3 justify-between items-center rounded-xl max-h-16 drop-shadow-lg"
         style={{ cursor: onClick ? 'pointer' : 'default' }}
         onClick={() => onClick?.(competitionTeam)}
     >
