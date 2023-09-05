@@ -76,19 +76,23 @@ export const Matches = ({ competition, user }: Props) => {
 
 const Content = ({ matches }: { matches: Match[] }) => {
     const grouped = groupByDate(matches)
-    return Array.from(grouped.entries()).map(([date, matches]) => (
-        <>
-            <div className="mb-1 mt-3">
-                <FormattedDate
-                    value={new Date(date)}
-                    weekday="long"
-                    day="numeric"
-                    month="long"
-                />
-            </div>
-            {matches.map((match) => (
-                <ListItem match={match} />
-            ))}
-        </>
-    ))
+    return !grouped.size ? (
+        <h1 className="w-full text-center">Nothing to see here</h1>
+    ) : (
+        Array.from(grouped.entries()).map(([date, matches]) => (
+            <>
+                <div className="mb-1 mt-3">
+                    <FormattedDate
+                        value={new Date(date)}
+                        weekday="long"
+                        day="numeric"
+                        month="long"
+                    />
+                </div>
+                {matches.map((match) => (
+                    <ListItem match={match} />
+                ))}
+            </>
+        ))
+    )
 }
