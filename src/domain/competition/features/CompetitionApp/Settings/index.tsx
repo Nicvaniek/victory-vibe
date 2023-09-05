@@ -45,6 +45,9 @@ export const Settings = ({ competition, onMsg, user }: Props) => {
                         case 'on_add_results_click':
                             setModal({ type: 'add_results' })
                             break
+                        case 'on_teams_click':
+                            setModal({ type: 'teams' })
+                            break
                         /* istanbul ignore next */
                         default:
                             return notReachable(msg)

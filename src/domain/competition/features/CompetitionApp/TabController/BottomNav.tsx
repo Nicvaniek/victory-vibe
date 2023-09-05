@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-    faRankingStar,
-    faMedal,
+    faEllipsis,
     faFootball,
-    faGear,
+    faMedal,
+    faRankingStar,
 } from '@fortawesome/free-solid-svg-icons'
 
 export type Tab =
@@ -43,8 +43,8 @@ export const BottomNav = ({ activeTab, onTabSelect }: Props) => (
             className={activeTab.type === 'settings' ? 'active' : ''}
             onClick={() => onTabSelect({ type: 'settings' })}
         >
-            <FontAwesomeIcon icon={faGear} />
-            <span className="btm-nav-label">Settings</span>
+            <FontAwesomeIcon icon={faEllipsis} />
+            <span className="btm-nav-label">More</span>
         </button>
     </div>
 )

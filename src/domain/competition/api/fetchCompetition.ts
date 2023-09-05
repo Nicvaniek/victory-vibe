@@ -73,6 +73,26 @@ const calculatePoints = (competition: Competition): Competition => {
             match.awayTeam.points += awayTeamPoints
         }
 
+        const homeTeam = competition.teams.find(
+            (t) => t.name === match.homeTeam?.name
+        )
+
+        if (homeTeam) {
+            homeTeam.points
+                ? (homeTeam.points += homeTeamPoints)
+                : (homeTeam.points = homeTeamPoints)
+        }
+
+        const awayTeam = competition.teams.find(
+            (t) => t.name === match.awayTeam?.name
+        )
+
+        if (awayTeam) {
+            awayTeam.points
+                ? (awayTeam.points += awayTeamPoints)
+                : (awayTeam.points = awayTeamPoints)
+        }
+
         competition.participants.forEach((participant) => {
             const { homeTeam, awayTeam } = match
             if (!participant.points) {
@@ -90,13 +110,14 @@ const calculatePoints = (competition: Competition): Competition => {
                 participant.points += homeTeamPoints
                 participant.matchesPlayed += 1
 
-                const team = participant.picks.find(
+                const pick = participant.picks.find(
                     (p) => p.name === homeTeam.name
                 )
-                if (team) {
-                    team.points
-                        ? (team.points += homeTeamPoints)
-                        : (team.points = homeTeamPoints)
+
+                if (pick) {
+                    pick.points
+                        ? (pick.points += homeTeamPoints)
+                        : (pick.points = homeTeamPoints)
                 }
             }
 
@@ -107,13 +128,13 @@ const calculatePoints = (competition: Competition): Competition => {
                 participant.points += awayTeamPoints
                 participant.matchesPlayed += 1
 
-                const team = participant.picks.find(
+                const pick = participant.picks.find(
                     (p) => p.name === awayTeam.name
                 )
-                if (team) {
-                    team.points
-                        ? (team.points += awayTeamPoints)
-                        : (team.points = awayTeamPoints)
+                if (pick) {
+                    pick.points
+                        ? (pick.points += awayTeamPoints)
+                        : (pick.points = awayTeamPoints)
                 }
             }
         })
