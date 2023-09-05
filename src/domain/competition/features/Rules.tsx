@@ -3,7 +3,7 @@ export const Rules = () => {
 
     return (
         <>
-            <h2 className="text-2xl mb-1 mt-4">
+            <h2 className="text-2xl mb-1">
                 <strong>Making picks</strong>
             </h2>
             <p>

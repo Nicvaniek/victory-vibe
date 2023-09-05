@@ -16,5 +16,9 @@ export const MyPicks = ({ competition, user }: Props) => {
         return null
     }
 
-    return <ParticipantPicks participant={participant} user={user} />
+    return (
+        <div className="mt-4 h-full">
+            <ParticipantPicks participant={participant} user={user} />
+        </div>
+    )
 }

@@ -29,8 +29,10 @@ export const Modal = ({ competition, state, onMsg }: Props) => {
     switch (state.type) {
         case 'teams':
             return (
-                <UIModal id="rules" onMsg={onMsg}>
-                    <div className="flex flex-col p-4 flex-1 justify-between h-full overflow-auto">
+                <UIModal
+                    id="teams"
+                    onMsg={onMsg}
+                    title={
                         <div className="flex items-center">
                             <img
                                 className="h-10"
@@ -39,7 +41,10 @@ export const Modal = ({ competition, state, onMsg }: Props) => {
                             />
                             <h1 className="text-3xl ml-4">Teams</h1>
                         </div>
-                        <div className="flex-1 overflow-auto mt-4">
+                    }
+                >
+                    <div className="flex flex-col px-4 pb-4 flex-1 justify-between h-full overflow-auto">
+                        <div className="flex-1 overflow-auto">
                             {competition.teams
                                 .sort(sortByPointsThenRank)
                                 .map((team, idx) => (
@@ -64,8 +69,10 @@ export const Modal = ({ competition, state, onMsg }: Props) => {
             return null
         case 'rules':
             return (
-                <UIModal id="rules" onMsg={onMsg}>
-                    <div className="flex flex-col p-4 flex-1 justify-between h-full overflow-auto">
+                <UIModal
+                    id="rules"
+                    onMsg={onMsg}
+                    title={
                         <div className="flex items-center">
                             <img
                                 className="h-10"
@@ -74,6 +81,9 @@ export const Modal = ({ competition, state, onMsg }: Props) => {
                             />
                             <h1 className="text-3xl ml-4">Rules</h1>
                         </div>
+                    }
+                >
+                    <div className="flex flex-col px-4 pb-4 flex-1 justify-between h-full overflow-auto">
                         <div className="flex-1 overflow-auto">
                             <Rules />
                         </div>
@@ -88,15 +98,33 @@ export const Modal = ({ competition, state, onMsg }: Props) => {
             )
         case 'add_results':
             return (
-                <UIModal id="rules" onMsg={onMsg}>
-                    <div className="flex flex-col p-4 h-full">
-                        <h1 className="text-3xl">Add results</h1>
-                        <div className="h-full overflow-auto">
+                <UIModal
+                    id="addResults"
+                    onMsg={onMsg}
+                    title={
+                        <div className="flex items-center">
+                            <img
+                                className="h-10"
+                                src={competition.heroImage}
+                                alt="logo"
+                            />
+                            <h1 className="text-3xl ml-4">Add results</h1>
+                        </div>
+                    }
+                >
+                    <div className="flex flex-col px-4 pb-4 flex-1 justify-between h-full overflow-auto">
+                        <div className="flex-1 overflow-auto">
                             <AddResults
                                 competition={competition}
                                 onMsg={onMsg}
                             />
                         </div>
+                        <button
+                            className="btn bg-accent text-white border-accent mt-2"
+                            onClick={() => onMsg({ type: 'close' })}
+                        >
+                            Close
+                        </button>
                     </div>
                 </UIModal>
             )

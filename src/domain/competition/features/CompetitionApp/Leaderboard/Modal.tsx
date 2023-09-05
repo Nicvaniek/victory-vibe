@@ -27,7 +27,11 @@ export const Modal = ({ user, state, onMsg }: Props) => {
             return null
         case 'participant_picks':
             return (
-                <UIModal id="picks" onMsg={onMsg}>
+                <UIModal
+                    id="picks"
+                    onMsg={onMsg}
+                    title={<h1 className="text-3xl">{`${state.participant.user.name}'s picks`}</h1>}
+                >
                     <div className="flex flex-col flex-1 justify-between h-full overflow-auto">
                         <ParticipantPicks
                             participant={state.participant}

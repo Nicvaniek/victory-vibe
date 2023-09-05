@@ -27,15 +27,12 @@ const sortByPointsThenRank = (a: CompetitionTeam, b: CompetitionTeam) => {
 export const ParticipantPicks = ({ user, participant }: Props) => {
     const groupedPicks = group(participant?.picks || [])
 
-    const title =
-        user.id === participant.user.id
-            ? 'My picks'
-            : `${participant.user.name}'s picks`
+    const isLoggedInUser = user.id === participant.user.id
 
     return (
-        <div className="flex flex-col p-4 h-full overflow-auto">
-            <h1 className="text-3xl">{title}</h1>
-            <div className="stats shadow mt-4">
+        <div className="flex flex-col px-4 pb-4 h-full overflow-auto">
+            {isLoggedInUser && <h1 className="text-3xl mb-4">My picks</h1>}
+            <div className="stats shadow">
                 <div className="stat place-items-center">
                     <div className="stat-title">Points</div>
                     <div className="stat-value">{participant.points || 0}</div>
