@@ -8,7 +8,14 @@ type Props = {
     onMsg: (msg: Msg) => void
 }
 
-type Msg = { type: 'on_participant_click'; participant: Participant }
+type Msg =
+    | {
+          type: 'on_participant_click'
+          participant: Participant
+      }
+    | {
+          type: 'on_self_click'
+      }
 
 export const Layout = ({ competition, onMsg, user }: Props) => (
     <div className="flex flex-col p-4 h-full">
@@ -31,10 +38,14 @@ export const Layout = ({ competition, onMsg, user }: Props) => (
                                 className="bg-white text-secondary"
                                 style={{ cursor: 'pointer' }}
                                 onClick={() =>
-                                    onMsg({
-                                        type: 'on_participant_click',
-                                        participant,
-                                    })
+                                    isLoggedInUser
+                                        ? onMsg({
+                                              type: 'on_self_click',
+                                          })
+                                        : onMsg({
+                                              type: 'on_participant_click',
+                                              participant,
+                                          })
                                 }
                             >
                                 <th
@@ -49,7 +60,9 @@ export const Layout = ({ competition, onMsg, user }: Props) => (
                                         isLoggedInUser ? 'text-accent' : ''
                                     }`}
                                 >
-                                    <span className="ml-1">{participant.user.name}</span>
+                                    <span className="ml-1">
+                                        {participant.user.name}
+                                    </span>
                                 </td>
                                 <td
                                     className={`px-0 ${

@@ -39,7 +39,20 @@ export const TabController = ({ competition, user, onMsg }: Props) => {
                     activeTab={activeTab}
                     competition={competition}
                     user={user}
-                    onMsg={onMsg}
+                    onMsg={(msg) => {
+                        switch (msg.type) {
+                            case 'on_sign_out':
+                            case 'result_added':
+                                onMsg(msg)
+                                break
+                            case 'on_self_click':
+                                setActiveTab({ type: 'my_picks' })
+                                break
+                            /* istanbul ignore next */
+                            default:
+                                return notReachable(msg)
+                        }
+                    }}
                 />
             </div>
             <BottomNav
@@ -50,6 +63,8 @@ export const TabController = ({ competition, user, onMsg }: Props) => {
     )
 }
 
+type ContentMsg = MsgOf<typeof Settings> | MsgOf<typeof Leaderboard>
+
 const Content = ({
     activeTab,
     competition,
@@ -59,17 +74,34 @@ const Content = ({
     activeTab: Tab
     competition: Competition
     user: User
-    onMsg: (msg: Msg) => void
+    onMsg: (msg: ContentMsg) => void
 }) => {
     switch (activeTab.type) {
         case 'leaderboard':
-            return <Leaderboard competition={competition} user={user} />
+            return (
+                <Leaderboard
+                    competition={competition}
+                    user={user}
+                    onMsg={(msg) => {
+                        switch (msg.type) {
+                            case 'on_self_click':
+                                onMsg(msg)
+                                break
+                            /* istanbul ignore next */
+                            default:
+                                return notReachable(msg.type)
+                        }
+                    }}
+                />
+            )
         case 'my_picks':
             return <MyPicks competition={competition} user={user} />
         case 'matches':
             return <Matches competition={competition} user={user} />
         case 'settings':
-            return <Settings competition={competition} onMsg={onMsg} user={user} />
+            return (
+                <Settings competition={competition} onMsg={onMsg} user={user} />
+            )
         /* istanbul ignore next */
         default:
             return notReachable(activeTab)

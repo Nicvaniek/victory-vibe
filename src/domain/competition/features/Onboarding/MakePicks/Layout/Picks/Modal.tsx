@@ -19,8 +19,10 @@ export const Modal = ({ competition, state, onMsg }: Props) => {
             return null
         case 'rules':
             return (
-                <UIModal id="rules" onMsg={onMsg}>
-                    <div className="flex flex-col p-4 flex-1 justify-between h-full overflow-auto">
+                <UIModal
+                    id="rules"
+                    onMsg={onMsg}
+                    title={
                         <div className="flex items-center">
                             <img
                                 className="h-10"
@@ -29,6 +31,9 @@ export const Modal = ({ competition, state, onMsg }: Props) => {
                             />
                             <h1 className="text-3xl ml-4">Rules</h1>
                         </div>
+                    }
+                >
+                    <div className="flex flex-col px-4 pb-4 flex-1 justify-between h-full overflow-auto">
                         <div className="flex-1 overflow-auto">
                             <Rules />
                         </div>

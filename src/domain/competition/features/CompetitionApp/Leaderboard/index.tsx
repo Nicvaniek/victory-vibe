@@ -4,13 +4,17 @@ import { useState } from 'react'
 import { Layout } from './Layout'
 import { notReachable } from '../../../../../toolkit/notReachable'
 import { User } from '../../../../../auth'
+import { MsgOf } from '../../../../../toolkit/MsgOf'
 
 type Props = {
     user: User
     competition: Competition
+    onMsg: (msg: Msg) => void
 }
 
-export const Leaderboard = ({ competition, user }: Props) => {
+type Msg = Extract<MsgOf<typeof Layout>, { type: 'on_self_click' }>
+
+export const Leaderboard = ({ competition, user, onMsg }: Props) => {
     const [modal, setModal] = useState<ModalState>({ type: 'closed' })
 
     return (
@@ -20,6 +24,9 @@ export const Leaderboard = ({ competition, user }: Props) => {
                 competition={competition}
                 onMsg={(msg) => {
                     switch (msg.type) {
+                        case 'on_self_click':
+                            onMsg(msg)
+                            break;
                         case 'on_participant_click':
                             setModal({
                                 type: 'participant_picks',
@@ -28,7 +35,7 @@ export const Leaderboard = ({ competition, user }: Props) => {
                             break
                         /* istanbul ignore next */
                         default:
-                            return notReachable(msg.type)
+                            return notReachable(msg)
                     }
                 }}
             />
