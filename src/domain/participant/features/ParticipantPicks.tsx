@@ -48,19 +48,25 @@ export const ParticipantPicks = ({ user, participant }: Props) => {
                 </div>
             </div>
             <div className="flex flex-col w-full flex-1 mt-4 overflow-auto">
-                {Array.from(groupedPicks.entries()).map(([tier, picks]) => (
-                    <div className="mb-2">
-                        <h2 className="mb-1">Tier {tier} picks:</h2>
-                        {picks.sort(sortByPointsThenRank).map((team, idx) => (
-                            <ListItem
-                                key={`${idx}-${team.name}`}
-                                competitionTeam={team}
-                                selected={null}
-                                showPoints
-                            />
-                        ))}
-                    </div>
-                ))}
+                {groupedPicks.size ? (
+                    Array.from(groupedPicks.entries()).map(([tier, picks]) => (
+                        <div className="mb-2">
+                            <h2 className="mb-1">Tier {tier} picks:</h2>
+                            {picks
+                                .sort(sortByPointsThenRank)
+                                .map((team, idx) => (
+                                    <ListItem
+                                        key={`${idx}-${team.name}`}
+                                        competitionTeam={team}
+                                        selected={null}
+                                        showPoints
+                                    />
+                                ))}
+                        </div>
+                    ))
+                ) : (
+                    <h2 className="text-center text-2xl mt-8">No picks yet</h2>
+                )}
             </div>
         </div>
     )
