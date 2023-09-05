@@ -1,15 +1,11 @@
 const {
-    collection,
-    doc,
-    getDocs,
     getFirestore,
-    query,
-    updateDoc,
 } = require('firebase/firestore')
 const { initializeApp } = require('firebase/app')
 const addMenRugbyIntlTeams = require('./scripts/add-men-rugby-intl-teams')
 const addRwc23Teams = require('./scripts/add-rwc-23-teams')
 const {addRwc23Matches, addQuarterFinals, addSemiFinals, addFinal } = require('./scripts/add-rwc-23-matches')
+const resetResults = require('./scripts/reset-results')
 
 const firebaseConfig = {
     apiKey: 'AIzaSyAdJKM5JfNJTgAHUKzNcO44Wls76cANXHc',
@@ -31,4 +27,5 @@ const db = getFirestore(app)
 // addRwc23Matches(db)
 // addQuarterFinals(db)
 // addSemiFinals(db)
-addFinal(db)
+// addFinal(db)
+resetResults(db)
