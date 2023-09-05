@@ -29,7 +29,7 @@ export const TabController = ({ competition, user, onMsg }: Props) => {
     }, [])
 
     return (
-        <div className="container mx-auto flex flex-col h-full justify-between">
+        <div className="mx-auto flex flex-col h-full justify-between">
             <div className="navbar bg-white text-secondary">
                 <img className="h-10" src={competition.logo} alt="logo" />
                 <span className="normal-case text-xl">{competition.name}</span>

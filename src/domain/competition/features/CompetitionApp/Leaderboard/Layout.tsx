@@ -45,7 +45,7 @@ export const Layout = ({ competition, onMsg, user }: Props) => (
                                     {participant.rank}
                                 </th>
                                 <td
-                                    className={`whitespace-nowrap overflow-hidden text-ellipsis px-1 text-left ${
+                                    className={`whitespace-nowrap overflow-hidden text-ellipsis px-1 py-4 text-left ${
                                         isLoggedInUser ? 'text-accent' : ''
                                     }`}
                                 >
