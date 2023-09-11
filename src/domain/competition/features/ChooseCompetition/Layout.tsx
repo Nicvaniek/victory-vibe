@@ -1,4 +1,5 @@
 import { Competition } from '../../index'
+import { noop } from '../../../../toolkit/noop'
 
 type Props = {
     competitions: Competition[]
@@ -9,6 +10,13 @@ type Msg = { type: 'on_competition_select'; competition: Competition }
 
 const colours: Record<string, string> = {
     rugbyWorldCup2023: '#2d3cff',
+    cricketWorldCup2023: '#310173',
+}
+
+// FIXME - do something better since we use these across the app
+const images: Record<string, string> = {
+    rugbyWorldCup2023: 'rwc2023-logo-white.svg',
+    cricketWorldCup2023: 'icc-23-logo.svg',
 }
 
 export const Layout = ({ competitions, onMsg }: Props) => {
@@ -20,24 +28,28 @@ export const Layout = ({ competitions, onMsg }: Props) => {
             {competitions.map((competition) => (
                 <div
                     onClick={() =>
-                        onMsg({ type: 'on_competition_select', competition })
+                        competition.enabled
+                            ? onMsg({
+                                  type: 'on_competition_select',
+                                  competition,
+                              })
+                            : noop()
                     }
                     style={{
                         backgroundColor: colours[competition.theme],
-                        cursor: 'pointer',
+                        cursor: competition.enabled ? 'pointer' : 'default',
                     }}
-                    className="p-8 rounded-xl w-full flex items-center justify-center drop-shadow-xl h-36 mb-4"
+                    className={`p-8 rounded-xl w-full flex items-center justify-center drop-shadow-xl h-36 mb-4 ${
+                        !competition.enabled ? 'opacity-40' : ''
+                    }`}
                 >
                     <img
                         className="h-28"
-                        src={competition.heroImage}
+                        src={`/images/${images[competition.theme]}`}
                         alt="logo"
                     />
                 </div>
             ))}
-            <div className="p-8 rounded-xl w-full flex items-center justify-center drop-shadow-xl h-36 bg-gray-400">
-                <h2>Coming Soon</h2>
-            </div>
         </div>
     )
 }

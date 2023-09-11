@@ -25,12 +25,18 @@ export const Modal = ({ user, state, onMsg }: Props) => {
     switch (state.type) {
         case 'closed':
             return null
-        case 'participant_picks':
+        case 'participant_picks': {
+            const { name } = state.participant.user
+            const lastLetter = name.charAt(name.length - 1)
             return (
                 <UIModal
                     id="picks"
                     onMsg={onMsg}
-                    title={<h1 className="text-3xl">{`${state.participant.user.name}'s picks`}</h1>}
+                    title={
+                        <h1 className="text-3xl">{`${name}${
+                            lastLetter === 's' ? "'" : "'s"
+                        } picks`}</h1>
+                    }
                 >
                     <div className="flex flex-col flex-1 justify-between h-full overflow-auto">
                         <ParticipantPicks
@@ -48,6 +54,7 @@ export const Modal = ({ user, state, onMsg }: Props) => {
                     </div>
                 </UIModal>
             )
+        }
         /* istanbul ignore next */
         default:
             return notReachable(state)

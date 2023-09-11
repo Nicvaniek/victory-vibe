@@ -12,6 +12,7 @@ export type Competition = {
     name: string
     logo: string
     heroImage: string
+    enabled: boolean
     participants: Participant[]
     teams: CompetitionTeam[]
     matches: Match[]
