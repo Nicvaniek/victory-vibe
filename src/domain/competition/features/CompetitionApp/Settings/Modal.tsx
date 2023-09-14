@@ -19,7 +19,7 @@ export type State = { type: 'closed' | 'rules' | 'add_results' | 'teams' }
 
 const sortByPointsThenRank = (a: CompetitionTeam, b: CompetitionTeam) => {
     if (a.points !== b.points) {
-        return b.points - a.points
+        return (b.points || 0) - (a.points || 0)
     }
 
     return a.team.ranking - b.team.ranking
