@@ -9,6 +9,7 @@ import { MsgOf } from '../../toolkit/MsgOf'
 type Props = {
     user: User
     competition: Competition
+    competitions: Competition[]
     onMsg: (msg: Msg) => void
 }
 
@@ -37,7 +38,12 @@ const calculateState = (
     return { type: 'competition', competition }
 }
 
-export const CompetitionWrapper = ({ user, competition, onMsg }: Props) => {
+export const CompetitionWrapper = ({
+    user,
+    competition,
+    onMsg,
+    competitions,
+}: Props) => {
     const [state, setState] = useState<State>(calculateState(competition, user))
 
     switch (state.type) {
@@ -64,6 +70,7 @@ export const CompetitionWrapper = ({ user, competition, onMsg }: Props) => {
         case 'competition':
             return (
                 <CompetitionApp
+                    competitions={competitions}
                     user={user}
                     competition={state.competition}
                     onMsg={onMsg}

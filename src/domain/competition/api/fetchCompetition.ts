@@ -18,7 +18,11 @@ export const fetchCompetition = async ({
         throw new Error('CompetitionApp does not exist')
     }
 
-    const comp = { ...snapshot.data(), id: snapshot.id } as Competition
+    const comp = {
+        ...snapshot.data(),
+        id: snapshot.id,
+        type: snapshot.data().theme,
+    } as Competition
 
     const withPoints = calculatePoints(comp)
 
@@ -151,7 +155,11 @@ const calculateTeamPoints = (
         return 0
     }
     const basePoints = getBasePoints(teamToCheck, match.result, competition)
-    const stageApplied = applyCompetitionStage(basePoints, match.stage)
+    const stageApplied = applyCompetitionStage(
+        basePoints,
+        match.stage,
+        competition
+    )
     return applyTeamRanking(stageApplied, teamToCheck)
 }
 
@@ -171,16 +179,20 @@ const getBasePoints = (
     }
 }
 
-const applyCompetitionStage = (basePoints: number, stage: Stage): number => {
+const applyCompetitionStage = (
+    basePoints: number,
+    stage: Stage,
+    competition: Competition
+): number => {
     switch (stage) {
         case 'GROUP':
             return basePoints
         case 'QUARTER_FINAL':
-            return basePoints * 1.5
+            return basePoints * competition.stageModifiers.quarter
         case 'SEMI_FINAL':
-            return basePoints * 2
+            return basePoints * competition.stageModifiers.semi
         case 'FINAL':
-            return basePoints * 2.5
+            return basePoints * competition.stageModifiers.final
         /* istanbul ignore next */
         default:
             return notReachable(stage)

@@ -11,7 +11,15 @@
 }
 
 [data-theme="rugbyWorldCup2023"] .tabs-boxed .tab-active:not(.tab-disabled):not([disabled]) {
-    background-color: #19194b;
+    background-color: #ff3000;
+}
+
+[data-theme="cricketWorldCup2023"] .btm-nav > *:where(.active) {
+    border-color: #ff00a5
+}
+
+[data-theme="cricketWorldCup2023"] .tabs-boxed .tab-active:not(.tab-disabled):not([disabled]) {
+    background-color: #ff00a5;
 }
 
 .mw-3 {

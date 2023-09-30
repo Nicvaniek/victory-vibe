@@ -22,6 +22,17 @@ export default {
                     warning: '#bf9b0d',
                     error: '#f6132d',
                 },
+                cricketWorldCup2023: {
+                    primary: '#320073',
+                    secondary: '#5B338F',
+                    accent: '#ff00a5',
+                    neutral: '#5B338F',
+                    'base-100': '#ffffff',
+                    info: '#3b7be3',
+                    success: '#1fd677',
+                    warning: '#bf9b0d',
+                    error: '#f6132d',
+                },
             },
         ],
         darkTheme: 'dark', // name of one of the included themes for dark mode

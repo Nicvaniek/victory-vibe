@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faListCheck,
     faPencil,
+    faRepeat,
     faPeopleGroup,
     faRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons'
@@ -19,12 +20,17 @@ type Msg =
     | { type: 'on_rules_click' }
     | { type: 'on_add_results_click' }
     | { type: 'on_teams_click' }
+    | { type: 'on_switch_competition_click' }
 
 export const Layout = ({ competition, onMsg, user }: Props) => {
     return (
         <div className="flex flex-col p-4 h-full justify-between">
             <h1 className="text-3xl">Settings</h1>
-            <img className="h-56 mt-8 mb-2" src={competition.heroImage} alt="logo" />
+            <img
+                className="h-56 mt-8 mb-2"
+                src={competition.heroImage}
+                alt="logo"
+            />
             <div className="flex flex-col">
                 {user.isAdmin && (
                     <button
@@ -41,10 +47,18 @@ export const Layout = ({ competition, onMsg, user }: Props) => {
                     <FontAwesomeIcon icon={faPeopleGroup} /> View teams
                 </button>
                 <button
-                    className="btn text-accent bg-white"
+                    className="btn text-accent bg-white mb-2"
                     onClick={() => onMsg({ type: 'on_rules_click' })}
                 >
                     <FontAwesomeIcon icon={faListCheck} /> View rules
+                </button>
+                <button
+                    className="btn text-accent bg-white"
+                    onClick={() =>
+                        onMsg({ type: 'on_switch_competition_click' })
+                    }
+                >
+                    <FontAwesomeIcon icon={faRepeat} /> Switch competition
                 </button>
 
                 <button

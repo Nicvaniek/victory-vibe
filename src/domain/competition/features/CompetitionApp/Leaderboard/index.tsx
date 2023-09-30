@@ -26,7 +26,7 @@ export const Leaderboard = ({ competition, user, onMsg }: Props) => {
                     switch (msg.type) {
                         case 'on_self_click':
                             onMsg(msg)
-                            break;
+                            break
                         case 'on_participant_click':
                             setModal({
                                 type: 'participant_picks',
@@ -41,6 +41,7 @@ export const Leaderboard = ({ competition, user, onMsg }: Props) => {
             />
             <Modal
                 state={modal}
+                competition={competition}
                 user={user}
                 onMsg={(msg) => {
                     switch (msg.type) {

@@ -2,9 +2,11 @@ import { ListItem } from '../../competition-team/components/ListItem'
 import { Participant } from '../index'
 import { User } from '../../../auth'
 import { CompetitionTeam } from '../../competition-team'
+import { Competition } from '../../competition'
 
 type Props = {
     participant: Participant
+    competition: Competition
     user: User
 }
 
@@ -24,7 +26,7 @@ const sortByPointsThenRank = (a: CompetitionTeam, b: CompetitionTeam) => {
     return a.team.ranking - b.team.ranking
 }
 
-export const ParticipantPicks = ({ user, participant }: Props) => {
+export const ParticipantPicks = ({ user, participant, competition }: Props) => {
     const groupedPicks = group(participant?.picks || [])
 
     const isLoggedInUser = user.id === participant.user.id
@@ -51,7 +53,11 @@ export const ParticipantPicks = ({ user, participant }: Props) => {
                 {groupedPicks.size ? (
                     Array.from(groupedPicks.entries()).map(([tier, picks]) => (
                         <div className="mb-2">
-                            <h2 className="mb-1">Tier {tier} picks:</h2>
+                            {competition.tiers.length > 1 ? (
+                                <h2 className="mb-1">Tier {tier} picks:</h2>
+                            ) : (
+                                <h2 className="mb-1">Picks:</h2>
+                            )}
                             {picks
                                 .sort(sortByPointsThenRank)
                                 .map((team, idx) => (

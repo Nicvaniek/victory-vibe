@@ -11,13 +11,19 @@ import { MsgOf } from '../../../../../toolkit/MsgOf'
 
 type Props = {
     competition: Competition
+    competitions: Competition[]
     user: User
     onMsg: (msg: Msg) => void
 }
 
 type Msg = MsgOf<typeof Settings>
 
-export const TabController = ({ competition, user, onMsg }: Props) => {
+export const TabController = ({
+    competition,
+    user,
+    onMsg,
+    competitions,
+}: Props) => {
     const [activeTab, setActiveTab] = useState<Tab>({ type: 'leaderboard' })
 
     useEffect(() => {
@@ -32,17 +38,21 @@ export const TabController = ({ competition, user, onMsg }: Props) => {
         <div className="mx-auto flex flex-col h-full justify-between">
             <div className="navbar bg-white text-secondary">
                 <img className="h-10" src={competition.logo} alt="logo" />
-                <span className="normal-case text-xl">{competition.name}</span>
+                <span className="normal-case text-xl ml-3">
+                    {competition.name}
+                </span>
             </div>
             <div className="flex-1" id="tab-content">
                 <Content
                     activeTab={activeTab}
+                    competitions={competitions}
                     competition={competition}
                     user={user}
                     onMsg={(msg) => {
                         switch (msg.type) {
                             case 'on_sign_out':
                             case 'result_added':
+                            case 'on_competition_switch_select':
                                 onMsg(msg)
                                 break
                             case 'on_self_click':
@@ -69,10 +79,12 @@ const Content = ({
     activeTab,
     competition,
     user,
+    competitions,
     onMsg,
 }: {
     activeTab: Tab
     competition: Competition
+    competitions: Competition[]
     user: User
     onMsg: (msg: ContentMsg) => void
 }) => {
@@ -100,7 +112,12 @@ const Content = ({
             return <Matches competition={competition} user={user} />
         case 'settings':
             return (
-                <Settings competition={competition} onMsg={onMsg} user={user} />
+                <Settings
+                    competition={competition}
+                    onMsg={onMsg}
+                    user={user}
+                    competitions={competitions}
+                />
             )
         /* istanbul ignore next */
         default:

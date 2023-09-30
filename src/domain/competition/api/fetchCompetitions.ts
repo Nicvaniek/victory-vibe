@@ -5,6 +5,11 @@ import { db } from '../../../firebase'
 export const fetchCompetitions = async (): Promise<Competition[]> => {
     const snapshot = await getDocs(collection(db, 'competitions'))
     return snapshot.docs.map(
-        (doc) => ({ id: doc.id, ...doc.data() }) as Competition
+        (doc) =>
+            ({
+                id: doc.id,
+                ...doc.data(),
+                type: doc.data().theme,
+            }) as Competition
     )
 }

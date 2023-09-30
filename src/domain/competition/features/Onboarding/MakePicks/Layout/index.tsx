@@ -60,6 +60,7 @@ export const Layout = ({ competition, onMsg }: Props) => {
         case 'confirmation':
             return (
                 <Confirmation
+                    competition={competition}
                     picks={state.picks}
                     onMsg={(msg) => {
                         switch (msg.type) {

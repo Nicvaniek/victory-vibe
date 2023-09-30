@@ -1,12 +1,12 @@
-import { Competition } from '../../../index'
+import { Competition } from '../../../../index'
 import { FormattedDate } from 'react-intl'
-import { Match, Result } from '../../../../match'
-import { notReachable } from '../../../../../toolkit/notReachable'
-import { useLazyLoadableData } from '../../../../../toolkit/LoadableData/LazyLoadableData'
-import { addResult } from '../../../api/add-result'
-import { CompetitionTeam } from '../../../../competition-team'
+import { Match, Result } from '../../../../../match'
+import { notReachable } from '../../../../../../toolkit/notReachable'
+import { useLazyLoadableData } from '../../../../../../toolkit/LoadableData/LazyLoadableData'
+import { addResult } from '../../../../api/add-result'
+import { CompetitionTeam } from '../../../../../competition-team'
 import { useEffect } from 'react'
-import { useLiveRef } from '../../../../../toolkit/useLiveRef'
+import { useLiveRef } from '../../../../../../toolkit/useLiveRef'
 
 type Props = {
     competition: Competition

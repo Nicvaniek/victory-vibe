@@ -8,10 +8,12 @@ export type Tier = {
 }
 
 export type Competition = {
+    type: 'rugbyWorldCup2023' | 'cricketWorldCup2023'
     id: string
     name: string
     logo: string
     heroImage: string
+    lightLogo: string
     enabled: boolean
     participants: Participant[]
     teams: CompetitionTeam[]
@@ -21,5 +23,10 @@ export type Competition = {
     points: {
         draw: number
         win: number
+    }
+    stageModifiers: {
+        quarter: number
+        semi: number
+        final: number
     }
 }

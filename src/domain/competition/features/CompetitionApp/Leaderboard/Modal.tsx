@@ -3,10 +3,12 @@ import { Modal as UIModal } from '../../../../../uikit/Modal'
 import { Participant } from '../../../../participant'
 import { ParticipantPicks } from '../../../../participant/features/ParticipantPicks'
 import { User } from '../../../../../auth'
+import { Competition } from '../../../index'
 
 type Props = {
     state: State
     user: User
+    competition: Competition
     onMsg: (msg: Msg) => void
 }
 
@@ -21,7 +23,7 @@ export type State =
           participant: Participant
       }
 
-export const Modal = ({ user, state, onMsg }: Props) => {
+export const Modal = ({ user, state, onMsg, competition }: Props) => {
     switch (state.type) {
         case 'closed':
             return null
@@ -40,6 +42,7 @@ export const Modal = ({ user, state, onMsg }: Props) => {
                 >
                     <div className="flex flex-col flex-1 justify-between h-full overflow-auto">
                         <ParticipantPicks
+                            competition={competition}
                             participant={state.participant}
                             user={user}
                         />

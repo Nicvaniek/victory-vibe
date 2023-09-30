@@ -10,12 +10,21 @@ import { useReloadableData } from '../../../../toolkit/LoadableData/ReloadableDa
 type Props = {
     competition: Competition
     user: User
+    competitions: Competition[]
     onMsg: (msg: Msg) => void
 }
 
-type Msg = Extract<MsgOf<typeof TabController>, { type: 'on_sign_out' }>
+type Msg = Extract<
+    MsgOf<typeof TabController>,
+    { type: 'on_sign_out' | 'on_competition_switch_select' }
+>
 
-export const CompetitionApp = ({ competition, user, onMsg }: Props) => {
+export const CompetitionApp = ({
+    competition,
+    competitions,
+    user,
+    onMsg,
+}: Props) => {
     const [loadable, setLoadable] = useReloadableData(fetchCompetition, {
         type: 'loading',
         params: { competition },
@@ -33,6 +42,7 @@ export const CompetitionApp = ({ competition, user, onMsg }: Props) => {
         case 'subsequent_failed':
             return (
                 <TabController
+                    competitions={competitions}
                     user={user}
                     competition={loadable.data}
                     onMsg={(msg) => {
@@ -45,6 +55,13 @@ export const CompetitionApp = ({ competition, user, onMsg }: Props) => {
                                     type: 'reloading',
                                     params: { competition },
                                     data: loadable.data,
+                                })
+                                break
+                            case 'on_competition_switch_select':
+                                onMsg(msg)
+                                setLoadable({
+                                    type: 'loading',
+                                    params: { competition: msg.competition },
                                 })
                                 break
                             /* istanbul ignore next */

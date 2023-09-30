@@ -6,32 +6,33 @@ type Props = {
     onMsg: (msg: Msg) => void
 }
 
-type Msg = { type: 'on_competition_select'; competition: Competition }
+type Msg = {
+    type: 'on_competition_select'
+    competition: Competition
+    competitions: Competition[]
+}
 
 const colours: Record<string, string> = {
     rugbyWorldCup2023: '#2d3cff',
     cricketWorldCup2023: '#310173',
 }
 
-// FIXME - do something better since we use these across the app
-const images: Record<string, string> = {
-    rugbyWorldCup2023: 'rwc2023-logo-white.svg',
-    cricketWorldCup2023: 'icc-23-logo.svg',
-}
-
 export const Layout = ({ competitions, onMsg }: Props) => {
+    const temp = competitions.map((c) => ({ ...c, enabled: true }))
+
     return (
         <div className="flex flex-col items-center p-4">
             <h1 className="text-4xl text-secondary mb-8 mt-4">
                 Choose competition
             </h1>
-            {competitions.map((competition) => (
+            {temp.map((competition) => (
                 <div
                     onClick={() =>
                         competition.enabled
                             ? onMsg({
                                   type: 'on_competition_select',
                                   competition,
+                                  competitions,
                               })
                             : noop()
                     }
@@ -45,7 +46,7 @@ export const Layout = ({ competitions, onMsg }: Props) => {
                 >
                     <img
                         className="h-28"
-                        src={`/images/${images[competition.theme]}`}
+                        src={competition.heroImage}
                         alt="logo"
                     />
                 </div>

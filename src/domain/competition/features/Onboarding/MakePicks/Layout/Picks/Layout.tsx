@@ -2,9 +2,10 @@ import { useCallback, useState } from 'react'
 import { CompetitionTeam } from '../../../../../../competition-team'
 import { sortByRank } from '../../../../../../competition-team/helpers/sortByRank'
 import { ListItem } from '../../../../../../competition-team/components/ListItem'
-import { Competition } from '../../../../../index'
+import { Competition, Tier } from '../../../../../index'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
+import { notReachable } from '../../../../../../../toolkit/notReachable'
 
 type Props = {
     competition: Competition
@@ -55,28 +56,12 @@ export const Layout = ({ competition, onMsg }: Props) => {
 
     return (
         <div className="flex flex-col items-center p-4 h-full justify-between">
-            <div className="flex flex-col items center w-full">
-                <div className="flex flex-row items-center mt-4 mb-4 justify-center">
-                    <img
-                        className="h-12"
-                        src="https://www.rugbyworldcup.com/rwc2023-resources/prod/rwc2023_v4.1.0/i/svg-files/elements/symbols/rwc2023-logo-white.svg"
-                        alt="logo"
-                    />
-                    <h1 className="text-4xl ms-3 me-3">
-                        Tier {currentTier.tier} teams
-                    </h1>
-                    <FontAwesomeIcon
-                        icon={faCircleQuestion}
-                        onClick={() => onMsg({ type: 'on_view_rules_click' })}
-                    />
-                </div>
-                <p className="text-center text-sm">
-                    Select your {currentTier.numPicks} picks for this tier.
-                    <br />
-                    <strong>Tip:</strong> To de-select a chosen team, just tap
-                    it again.
-                </p>
-            </div>
+            <Header
+                competition={competition}
+                tier={currentTier}
+                onMsg={onMsg}
+            />
+
             <div className="flex flex-col w-full flex-1 mt-4 overflow-auto">
                 {teams.map((team, idx) => (
                     <ListItem
@@ -130,4 +115,74 @@ export const Layout = ({ competition, onMsg }: Props) => {
             </div>
         </div>
     )
+}
+
+const Header = ({
+    competition,
+    tier,
+    onMsg,
+}: {
+    competition: Competition
+    tier: Tier
+    onMsg: (msg: Msg) => void
+}) => {
+    switch (competition.type) {
+        case 'rugbyWorldCup2023':
+            return (
+                <div className="flex flex-col items center w-full">
+                    <div className="flex flex-row items-center mt-4 mb-4 justify-center">
+                        <img
+                            className="h-28"
+                            src={competition.heroImage}
+                            alt="logo"
+                        />
+                        <h1 className="text-4xl ms-3 me-3">
+                            Tier {tier.tier} teams
+                        </h1>
+                        <FontAwesomeIcon
+                            icon={faCircleQuestion}
+                            onClick={() =>
+                                onMsg({ type: 'on_view_rules_click' })
+                            }
+                        />
+                    </div>
+                    <p className="text-center text-sm">
+                        Select your {tier.numPicks} picks for this tier.
+                        <br />
+                        <strong>Tip:</strong> To de-select a chosen team, just
+                        tap it again.
+                    </p>
+                </div>
+            )
+        case 'cricketWorldCup2023':
+            return (
+                <div className="flex flex-col items center w-full">
+                    <div className="flex flex-col items-center mb-4 justify-center">
+                        <img
+                            className="h-28"
+                            src={competition.heroImage}
+                            alt="logo"
+                        />
+                        <div className="flex flex-row items-center justify-center">
+                            <h1 className="text-4xl ms-3 me-3">Teams</h1>
+                            <FontAwesomeIcon
+                                icon={faCircleQuestion}
+                                onClick={() =>
+                                    onMsg({ type: 'on_view_rules_click' })
+                                }
+                            />
+                        </div>
+                    </div>
+                    <p className="text-center text-sm">
+                        Select your two teams from the list below.
+                        <br />
+                        <strong>Tip:</strong> To de-select a chosen team, just
+                        tap it again.
+                    </p>
+                </div>
+            )
+        /* istanbul ignore next */
+        default:
+            return notReachable(competition.type)
+    }
 }

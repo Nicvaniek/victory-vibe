@@ -26,7 +26,7 @@ export const Modal = ({ competition, state, onMsg }: Props) => {
                         <div className="flex items-center">
                             <img
                                 className="h-10"
-                                src={competition.heroImage}
+                                src={competition.lightLogo}
                                 alt="logo"
                             />
                             <h1 className="text-3xl ml-4">Rules</h1>
@@ -35,7 +35,7 @@ export const Modal = ({ competition, state, onMsg }: Props) => {
                 >
                     <div className="flex flex-col px-4 pb-4 flex-1 justify-between h-full overflow-auto">
                         <div className="flex-1 overflow-auto">
-                            <Rules />
+                            <Rules competition={competition} />
                         </div>
                         <button
                             className="btn bg-accent text-white border-accent mt-2"

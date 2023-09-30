@@ -11,7 +11,11 @@ type Props = {
 
 type State =
     | { type: 'choose_competition' }
-    | { type: 'competition'; competition: Competition }
+    | {
+          type: 'competition'
+          competition: Competition
+          competitions: Competition[]
+      }
 
 export const Game = ({ auth }: Props) => {
     const [state, setState] = useState<State>({ type: 'choose_competition' })
@@ -31,6 +35,7 @@ export const Game = ({ auth }: Props) => {
                                 setState({
                                     type: 'competition',
                                     competition: msg.competition,
+                                    competitions: msg.competitions,
                                 })
                                 break
                             /* istanbul ignore next */
@@ -49,14 +54,21 @@ export const Game = ({ auth }: Props) => {
                     <CompetitionWrapper
                         user={session.user}
                         competition={state.competition}
+                        competitions={state.competitions}
                         onMsg={(msg) => {
                             switch (msg.type) {
                                 case 'on_sign_out':
                                     logout()
                                     break
+                                case 'on_competition_switch_select':
+                                    setState((prev) => ({
+                                        ...prev,
+                                        competition: msg.competition,
+                                    }))
+                                    break
                                 /* istanbul ignore next */
                                 default:
-                                    return notReachable(msg.type)
+                                    return notReachable(msg)
                             }
                         }}
                     />

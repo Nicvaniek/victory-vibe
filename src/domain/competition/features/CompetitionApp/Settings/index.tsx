@@ -8,6 +8,7 @@ import { User } from '../../../../../auth'
 
 type Props = {
     competition: Competition
+    competitions: Competition[]
     user: User
     onMsg: (msg: Msg) => void
 }
@@ -22,11 +23,11 @@ type Msg =
     | Extract<
           MsgOf<typeof Modal>,
           {
-              type: 'result_added'
+              type: 'result_added' | 'on_competition_switch_select'
           }
       >
 
-export const Settings = ({ competition, onMsg, user }: Props) => {
+export const Settings = ({ competition, onMsg, user, competitions }: Props) => {
     const [modal, setModal] = useState<ModalState>({ type: 'closed' })
 
     return (
@@ -48,6 +49,9 @@ export const Settings = ({ competition, onMsg, user }: Props) => {
                         case 'on_teams_click':
                             setModal({ type: 'teams' })
                             break
+                        case 'on_switch_competition_click':
+                            setModal({ type: 'switch_competition' })
+                            break
                         /* istanbul ignore next */
                         default:
                             return notReachable(msg)
@@ -56,6 +60,7 @@ export const Settings = ({ competition, onMsg, user }: Props) => {
             />
             <Modal
                 state={modal}
+                competitions={competitions}
                 competition={competition}
                 onMsg={(msg) => {
                     switch (msg.type) {
@@ -63,6 +68,7 @@ export const Settings = ({ competition, onMsg, user }: Props) => {
                             setModal({ type: 'closed' })
                             break
                         case 'result_added':
+                        case 'on_competition_switch_select':
                             onMsg(msg)
                             break
                         /* istanbul ignore next */
