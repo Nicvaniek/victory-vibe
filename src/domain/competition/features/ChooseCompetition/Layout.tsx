@@ -18,14 +18,12 @@ const colours: Record<string, string> = {
 }
 
 export const Layout = ({ competitions, onMsg }: Props) => {
-    const temp = competitions.map((c) => ({ ...c, enabled: true }))
-
     return (
         <div className="flex flex-col items-center p-4">
             <h1 className="text-4xl text-secondary mb-8 mt-4">
                 Choose competition
             </h1>
-            {temp.map((competition) => (
+            {competitions.map((competition) => (
                 <div
                     onClick={() =>
                         competition.enabled

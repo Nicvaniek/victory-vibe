@@ -50,7 +50,7 @@ const Content = ({ competition }: { competition: Competition }) => {
                 <p className="text-center">
                     The teams playing in the World Cup have been given handicaps
                     based on their world ranking. You must choose two teams to
-                    enter the competition <br />
+                    enter the competition. <br />
                     <br />
                     <strong>Note:</strong> All picks must be made before the
                     first match starts on Thursday 05 October.

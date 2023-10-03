@@ -32,12 +32,12 @@ const RulesRWC23 = () => (
         </h2>
         <p>
             Teams earn points for winning or drawing matches. Your points total
-            is the sum of all the points earned by the teams you picked. <br />{' '}
+            is the sum of all the points earned by the teams you picked. <br />
             <br />
             Points are calculated after each match and are assigned based on the
             outcome of the match as well as two modifiers. Winning a match earns
-            a team <strong>30</strong> base points, whereas a draw earns{' '}
-            <strong>10</strong> base points (base points exclude modifiers).{' '}
+            a team <strong>30</strong> base points, whereas a draw earns
+            <strong>10</strong> base points (base points exclude modifiers).
             <br /> <br />
             <strong>The modifiers are:</strong>
             <br />
@@ -143,29 +143,29 @@ const RulesCWC23 = () => (
             <strong>Making picks</strong>
         </h2>
         <p>
-            The teams playing in the World Cup have been divided into three
-            tiers based on their world rankings. You must choose two teams from
-            each tier. <br />
+            You must choose two teams from the 10 countries participating in the
+            ICC Cricket World Cup 2023.
             <br />
-            <strong>Note:</strong> All picks must be made before the first game
-            kicks off on Friday 08 September.
+            <br />
+            <strong>Note:</strong> All picks must be made before the first match
+            starts on Thursday 05 October.
         </p>
         <h2 className="text-2xl mb-1 mt-6">
             <strong>Earning points</strong>
         </h2>
         <p>
             Teams earn points for winning or drawing matches. Your points total
-            is the sum of all the points earned by the teams you picked. <br />{' '}
+            is the sum of all the points earned by the teams you picked. <br />
             <br />
             Points are calculated after each match and are assigned based on the
             outcome of the match as well as two modifiers. Winning a match earns
-            a team <strong>30</strong> base points, whereas a draw earns{' '}
-            <strong>10</strong> base points (base points exclude modifiers).{' '}
+            a team <strong>30</strong> base points, whereas a draw earns
+            <strong> 10</strong> base points (base points exclude modifiers).
             <br /> <br />
             <strong>The modifiers are:</strong>
             <br />
             1. The team’s “handicap” which is based on their world ranking
-            points. For example: Fiji has a higher handicap than Ireland,
+            points. For example: Sri Lanka has a higher handicap than India,
             meaning they would earn more points for winning or drawing a match.
             See examples below. <br /> <br />
             2. The stage of the competition that the match forms part of. Teams
@@ -185,12 +185,8 @@ const RulesCWC23 = () => (
                     <td>1</td>
                 </tr>
                 <tr>
-                    <td>Quarter final</td>
-                    <td>1.5</td>
-                </tr>
-                <tr>
                     <td>Semi final</td>
-                    <td>2</td>
+                    <td>1.5</td>
                 </tr>
                 <tr>
                     <td>Final</td>
@@ -208,20 +204,20 @@ const RulesCWC23 = () => (
             </i>
         </p>
         <p className="mt-4">
-            <strong>Example 1:</strong> New Zealand has a handicap of 1.06 based
-            on their world ranking points. Winning a quarter final would earn
-            New Zealand&nbsp;
+            <strong>Example 1:</strong> Pakistan has a handicap of 1.05 based on
+            their world ranking points. Winning a semi final would earn
+            Pakistan&nbsp;
             <i>
-                30 x 1.06 x 1.5 ≈ <strong>48 points </strong>
+                30 x 1.05 x 1.5 ≈ <strong>47 points </strong>
             </i>
             (rounded to the nearest whole number).
         </p>
         <p className="mt-4">
-            <strong>Example 2:</strong> Namibia has a handicap of 1.66 based on
-            their world ranking points. Winning a pool game would earn
-            Namibia&nbsp;
+            <strong>Example 2:</strong> Bangladesh has a handicap of 2.14 based
+            on their world ranking points. Winning a pool game would earn
+            Bangladesh&nbsp;
             <i>
-                30 x 1.66 x 1 ≈ <strong>50 points </strong>
+                30 x 2.14 x 1 ≈ <strong>64 points </strong>
             </i>
             (rounded to the nearest whole number).
         </p>
@@ -244,10 +240,10 @@ const RulesCWC23 = () => (
             event. <br />
             <br /> Prior to the World Cup final being played, participants with
             the possibility of ending the competition on the same number of
-            points will be asked to predict the score for the final match. If,
-            after the final, participants have the same number of points, their
-            rankings will be determined based on the accuracy of their score
-            prediction.
+            points will be asked to predict the winning team and their number of
+            runs. If, after the final, participants have the same number of
+            points, their rankings will be determined based on the accuracy of
+            their score prediction.
         </p>
         <p className="mt-4 mb-4">
             <strong>

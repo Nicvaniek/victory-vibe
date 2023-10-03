@@ -14,8 +14,7 @@ export const SwitchCompetition = ({
     currentCompetition,
     onMsg,
 }: Props) => {
-    const temp = competitions.map((c) => ({ ...c, enabled: true }))
-    return temp
+    return competitions
         .filter((c) => c.id !== currentCompetition.id)
         .map((competition) => (
             <div
