@@ -59,6 +59,7 @@ export const Settings = ({ competition, onMsg, user, competitions }: Props) => {
                 }}
             />
             <Modal
+                user={user}
                 state={modal}
                 competitions={competitions}
                 competition={competition}

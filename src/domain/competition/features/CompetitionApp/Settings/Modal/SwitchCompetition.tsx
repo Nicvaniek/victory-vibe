@@ -1,8 +1,10 @@
 import { Competition } from '../../../../index'
 import { noop } from '../../../../../../toolkit/noop'
+import { User } from '../../../../../../auth'
 
 type Props = {
     competitions: Competition[]
+    user: User
     currentCompetition: Competition
     onMsg: (msg: Msg) => void
 }
@@ -11,12 +13,16 @@ type Msg = { type: 'on_competition_switch_select'; competition: Competition }
 
 export const SwitchCompetition = ({
     competitions,
+    user,
     currentCompetition,
     onMsg,
 }: Props) => {
-    return competitions
+    const otherCompetitions = competitions
         .filter((c) => c.id !== currentCompetition.id)
-        .map((competition) => (
+        .filter((c) => c.participants.map((p) => p.user.id).includes(user.id))
+
+    return otherCompetitions.length ? (
+        otherCompetitions.map((competition) => (
             <div
                 onClick={() =>
                     competition.enabled
@@ -36,4 +42,9 @@ export const SwitchCompetition = ({
                 <img className="h-28" src={competition.heroImage} alt="logo" />
             </div>
         ))
+    ) : (
+        <h1 className="w-full text-center">
+            You have not entered any other competitions
+        </h1>
+    )
 }
