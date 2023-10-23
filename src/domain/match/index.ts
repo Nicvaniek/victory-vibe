@@ -4,6 +4,7 @@ export type Stage =
     | 'GROUP'
     | 'QUARTER_FINAL'
     | 'SEMI_FINAL'
+    | 'BRONZE_FINAL'
     | 'FINAL'
 
 export type Result =

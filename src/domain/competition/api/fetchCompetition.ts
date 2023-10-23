@@ -191,6 +191,8 @@ const applyCompetitionStage = (
             return basePoints * competition.stageModifiers.quarter
         case 'SEMI_FINAL':
             return basePoints * competition.stageModifiers.semi
+        case 'BRONZE_FINAL':
+            return basePoints * competition.stageModifiers.bronze
         case 'FINAL':
             return basePoints * competition.stageModifiers.final
         /* istanbul ignore next */

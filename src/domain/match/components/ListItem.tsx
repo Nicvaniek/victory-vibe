@@ -13,6 +13,8 @@ const getStageName = (stage: Stage): string => {
             return 'Quarter final'
         case 'SEMI_FINAL':
             return 'Semi-final'
+        case 'BRONZE_FINAL':
+            return 'Bronze final'
         case 'FINAL':
             return 'Final'
         /* istanbul ignore next */

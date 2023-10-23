@@ -70,6 +70,10 @@ const RulesRWC23 = () => (
                     <td>2</td>
                 </tr>
                 <tr>
+                    <td>Bronze final</td>
+                    <td>1.75</td>
+                </tr>
+                <tr>
                     <td>Final</td>
                     <td>2.5</td>
                 </tr>

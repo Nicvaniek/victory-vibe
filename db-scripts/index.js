@@ -9,6 +9,7 @@ const {
     addQuarterFinals,
     addSemiFinals,
     addFinal,
+    addBronzeFinal,
 } = require('./scripts/add-rwc-23-matches')
 const resetResults = require('./scripts/reset-results')
 const { addCwc23Matches } = require('./scripts/add-cwc-23-matches')
@@ -29,10 +30,13 @@ const db = getFirestore(app)
 
 // addMenCricketIntlTeams(db)
 // addCwc23Teams(db)
-addCwc23Matches(db)
+// addCwc23Matches(db)
 // addRwc23Teams(db)
 // addRwc23Matches(db)
 // addQuarterFinals(db)
 // addSemiFinals(db)
-// addFinal(db)
+// addBronzeFinal(db)
+addFinal(db)
 // resetResults(db)
+
+return 0

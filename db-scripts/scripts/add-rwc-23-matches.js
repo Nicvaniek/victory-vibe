@@ -70,7 +70,7 @@ const addQuarterFinals = async (db) => {
     const updatedMatches = comp['matches'].map((match) => {
         if (match.id === '28806') {
             const homeTeam = comp['teams'].find(
-                (compTeam) => compTeam.name === 'Fiji'
+                (compTeam) => compTeam.name === 'Wales'
             )
 
             if (!homeTeam) {
@@ -78,7 +78,7 @@ const addQuarterFinals = async (db) => {
             }
 
             const awayTeam = comp['teams'].find(
-                (compTeam) => compTeam.name === 'Japan'
+                (compTeam) => compTeam.name === 'Argentina'
             )
 
             if (!homeTeam) {
@@ -90,7 +90,7 @@ const addQuarterFinals = async (db) => {
 
         if (match.id === '28807') {
             const homeTeam = comp['teams'].find(
-                (compTeam) => compTeam.name === 'South Africa'
+                (compTeam) => compTeam.name === 'Ireland'
             )
 
             if (!homeTeam) {
@@ -98,7 +98,7 @@ const addQuarterFinals = async (db) => {
             }
 
             const awayTeam = comp['teams'].find(
-                (compTeam) => compTeam.name === 'France'
+                (compTeam) => compTeam.name === 'New Zealand'
             )
 
             if (!homeTeam) {
@@ -110,7 +110,7 @@ const addQuarterFinals = async (db) => {
 
         if (match.id === '28808') {
             const homeTeam = comp['teams'].find(
-                (compTeam) => compTeam.name === 'Argentina'
+                (compTeam) => compTeam.name === 'England'
             )
 
             if (!homeTeam) {
@@ -118,7 +118,7 @@ const addQuarterFinals = async (db) => {
             }
 
             const awayTeam = comp['teams'].find(
-                (compTeam) => compTeam.name === 'Wales'
+                (compTeam) => compTeam.name === 'Fiji'
             )
 
             if (!homeTeam) {
@@ -130,7 +130,7 @@ const addQuarterFinals = async (db) => {
 
         if (match.id === '28809') {
             const homeTeam = comp['teams'].find(
-                (compTeam) => compTeam.name === 'New Zealand'
+                (compTeam) => compTeam.name === 'France'
             )
 
             if (!homeTeam) {
@@ -138,7 +138,7 @@ const addQuarterFinals = async (db) => {
             }
 
             const awayTeam = comp['teams'].find(
-                (compTeam) => compTeam.name === 'Ireland'
+                (compTeam) => compTeam.name === 'South Africa'
             )
 
             if (!homeTeam) {
@@ -163,7 +163,7 @@ const addSemiFinals = async (db) => {
     const updatedMatches = comp['matches'].map((match) => {
         if (match.id === '28810') {
             const homeTeam = comp['teams'].find(
-                (compTeam) => compTeam.name === 'South Africa'
+                (compTeam) => compTeam.name === 'Argentina'
             )
 
             if (!homeTeam) {
@@ -171,7 +171,7 @@ const addSemiFinals = async (db) => {
             }
 
             const awayTeam = comp['teams'].find(
-                (compTeam) => compTeam.name === 'Fiji'
+                (compTeam) => compTeam.name === 'New Zealand'
             )
 
             if (!homeTeam) {
@@ -183,7 +183,7 @@ const addSemiFinals = async (db) => {
 
         if (match.id === '28811') {
             const homeTeam = comp['teams'].find(
-                (compTeam) => compTeam.name === 'Ireland'
+                (compTeam) => compTeam.name === 'England'
             )
 
             if (!homeTeam) {
@@ -191,7 +191,7 @@ const addSemiFinals = async (db) => {
             }
 
             const awayTeam = comp['teams'].find(
-                (compTeam) => compTeam.name === 'Wales'
+                (compTeam) => compTeam.name === 'South Africa'
             )
 
             if (!homeTeam) {
@@ -207,6 +207,43 @@ const addSemiFinals = async (db) => {
     await updateDoc(compDocRef, { matches: updatedMatches })
 }
 
+const addBronzeFinal = async (db) => {
+    const compDocRef = doc(db, 'competitions', '5VGk9pp55mvSTRSJmyJb')
+    const snapshot = await getDoc(compDocRef)
+
+    const comp = snapshot.data()
+
+    const homeTeam = comp['teams'].find(
+        (compTeam) => compTeam.name === 'Argentina'
+    )
+
+    if (!homeTeam) {
+        console.error('Home Team not found for BF 28812')
+    }
+
+    const awayTeam = comp['teams'].find(
+        (compTeam) => compTeam.name === 'England'
+    )
+
+    if (!homeTeam) {
+        console.error('Away Team not found for BF 28812')
+    }
+
+    const matches = comp['matches']
+    const matchTemplate = matches[matches.length - 1]
+    const bronzeFinal = {
+        ...matchTemplate,
+        date: '2023-10-27',
+        id: '28812',
+        stage: 'BRONZE_FINAL',
+        homeTeam,
+        awayTeam,
+    }
+    matches.splice(-1, 0, bronzeFinal)
+
+    await updateDoc(compDocRef, { matches })
+}
+
 const addFinal = async (db) => {
     const compDocRef = doc(db, 'competitions', '5VGk9pp55mvSTRSJmyJb')
     const snapshot = await getDoc(compDocRef)
@@ -216,7 +253,7 @@ const addFinal = async (db) => {
     const updatedMatches = comp['matches'].map((match) => {
         if (match.id === '28813') {
             const homeTeam = comp['teams'].find(
-                (compTeam) => compTeam.name === 'South Africa'
+                (compTeam) => compTeam.name === 'New Zealand'
             )
 
             if (!homeTeam) {
@@ -224,7 +261,7 @@ const addFinal = async (db) => {
             }
 
             const awayTeam = comp['teams'].find(
-                (compTeam) => compTeam.name === 'Ireland'
+                (compTeam) => compTeam.name === 'South Africa'
             )
 
             if (!homeTeam) {
@@ -240,4 +277,10 @@ const addFinal = async (db) => {
     await updateDoc(compDocRef, { matches: updatedMatches })
 }
 
-module.exports = { addRwc23Matches, addQuarterFinals, addSemiFinals, addFinal }
+module.exports = {
+    addRwc23Matches,
+    addQuarterFinals,
+    addSemiFinals,
+    addBronzeFinal,
+    addFinal,
+}

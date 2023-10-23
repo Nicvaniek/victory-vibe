@@ -27,6 +27,7 @@ export type Competition = {
     stageModifiers: {
         quarter: number
         semi: number
+        bronze: number
         final: number
     }
 }
